@@ -1,0 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+    display: block;
+}
+
+.container {
+    padding: 20px;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 100px;
+    user-select: none;
+}
+
