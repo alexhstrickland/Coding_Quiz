@@ -16,3 +16,18 @@ button {
     user-select: none;
 }
 
+#question{
+    text-align: center;
+}
+ 
+#quiz {
+    visibility: hidden;
+}
+
+#initials {
+    visibility: hidden;
+}
+
+#scores {
+    visibility: hidden;
+}
