@@ -62,6 +62,11 @@ function hide(id) {
     hidden.style.display = "none";
 }
 
+function invisible(id) {
+    var show = document.getElementById(id);
+    show.style.visibility = "hidden"
+}
+ 
 function show(id) {
     var visible = document.getElementById(id);
     visible.style.visibility = "visible";
@@ -71,5 +76,5 @@ startBtn.addEventListener("click", function() {
     // startPage.style.display = ;
     hide("start-button");
     // show("quiz");
-    console.log("m");
+    
 });
