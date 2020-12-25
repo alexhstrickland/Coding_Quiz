@@ -75,6 +75,10 @@ function show(id) {
 startBtn.addEventListener("click", function() {
     // startPage.style.display = ;
     hide("start-button");
-    // show("quiz");
+    show("quiz");
     
 });
+
+for (var i=0; i < questionAnswers.length; i++) {
+    document.getElementById("#question").innerHTML = questionAnswers[i].question;
+}
