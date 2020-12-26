@@ -72,12 +72,25 @@ function show(id) {
     visible.style.visibility = "visible";
 }
 
+function timerSetting() {
+
+}
+
 startBtn.addEventListener("click", function() {
-    // startPage.style.display = ;
+    /* hide first page and show quiz */
     hide("start-button");
     show("quiz");
     
 });
+
+function nextQuestion() {
+    var currentQ = document.getElementsById("question");
+
+    for (var i=0; i < questionAnswers.length; i++) {
+        document.getElementById("#question").innerHTML = questionAnswers[i].question;
+    }
+
+}
 
 for (var i=0; i < questionAnswers.length; i++) {
     document.getElementById("#question").innerHTML = questionAnswers[i].question;
