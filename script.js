@@ -110,11 +110,8 @@ function getQuestion(currentQuestion) {
 
 
             aBtns.appendChild(newB);
-
         }
-
     }
-
 }
 
 
@@ -203,7 +200,6 @@ startBtn.addEventListener("click", function() {
     currentQuestion = 0;
     getQuestion(0);
     questionClick();
-    
 });
 
   // user clicks button to submit initials
