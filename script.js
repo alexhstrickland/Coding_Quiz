@@ -11,7 +11,7 @@ var buttonOne = document.querySelector("#btn1");
 var buttonTwo = document.querySelector("#btn2");
 var buttonThree = document.querySelector("#btn3");
 var buttonFour= document.querySelector("#btn4");
-// var resultSection = document.querySelector("#result-sec");
+var final = document.querySelector("#final-score");
 var scorePage = document.querySelector("#scores");
 
 var questionAnswers = [
@@ -72,14 +72,10 @@ function hide(id) {
     // hidden.style.visibility= "hidden";
     hidden.style.display = "none";
 }
-
-function invisible(id) {
-    var show = document.getElementById(id);
-    show.style.visibility = "hidden"
-}
  
 function show(id) {
     var visible = document.getElementById(id);
+    visible.style.display = "visible";
     visible.style.visibility = "visible";
 }
 
@@ -99,7 +95,7 @@ function timerSetting() {
 
 function startQuiz() {
     hide("start-button");
-    quiz.style.visibility = "visible";
+    show("quiz");
     timerSetting();
 
 }
@@ -136,7 +132,6 @@ function questionClick() {
     aBtns.addEventListener("click", function (event) {
         if (event.target.matches("button")) {
             clickedEvent = event.target;
-            console.log(clickedEvent);
         }
     // })
     // check if user guessed wrong
@@ -153,7 +148,7 @@ function questionClick() {
 
     
             resultSection.textContent = "Correct!";
-            score +=;
+            score = score + 1;
             }
     
         // flash right/wrong feedback on page for half a second
@@ -163,27 +158,27 @@ function questionClick() {
         }, 1000);
     
         // move to next question
-    
+        currentQuestion = currentQuestion + 1;
         // check if we've run out of questions
-        if (currentQuestion=== questionAnswers.length) {
-        quizEnd();
+        if (currentQuestion === questionAnswers.length) {
+            quizEnd();
         } else {
-            currentQuestion = currentQuestion + 1;
             getQuestion(currentQuestion);
         }
     })
 }
   
 function quizEnd() {
+    hide("quiz");
+    show("initials");
+    final.textContent = "Your final score is " + score + ".";
     // stop timer
-    alert("OVER");
     // show end screen
   
     // show final score
   
     // hide questions section
-    hide("quiz");
-    show("scores");
+    
 }
   
 // function clockTick() {
