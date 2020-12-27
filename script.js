@@ -1,5 +1,4 @@
 var timer = document.querySelector("#time");
-// var question = document.querySelector("#question");
 var startBtn = document.querySelector("#start");
 var startPage = document.querySelector("#start-button");
 var submitBtn = document.querySelector("#init");
@@ -7,10 +6,6 @@ var aBtns = document.querySelector("#vert");
 var currentQuestion;
 var score = 0;
 var secs = 150;
-var buttonOne = document.querySelector("#btn1");
-var buttonTwo = document.querySelector("#btn2");
-var buttonThree = document.querySelector("#btn3");
-var buttonFour= document.querySelector("#btn4");
 var final = document.querySelector("#final-score");
 var scorePage = document.querySelector("#scores");
 
@@ -170,27 +165,10 @@ function questionClick() {
   
 function quizEnd() {
     hide("quiz");
+    hide("time");
     show("initials");
     final.textContent = "Your final score is " + score + ".";
-    // stop timer
-    // show end screen
-  
-    // show final score
-  
-    // hide questions section
-    
 }
-  
-// function clockTick() {
-//     // update time
-//     time--;
-//     timerEl.textContent = time;
-  
-//     // check if user ran out of time
-//     if (time <= 0) {
-//       quizEnd();
-//     }
-// }
 
 function saveHighscore() {
     // get value of input box
@@ -224,15 +202,15 @@ startBtn.addEventListener("click", function() {
     currentQuestion = 0;
     getQuestion(0);
     questionClick();
-    // aBtns.addEventListener("click", function (event) {
-    //     if (event.target.matches("button")) {
-    //         var clickedEvent = event.target;
-    //         console.log(clickedEvent); 
-    //     }
-    // })
-
     
 });
 
   // user clicks button to submit initials
 submitBtn.addEventListener("click", saveHighscore);
+
+// goBack.addEventListener("click", function() {
+//     show("start-button");
+
+// }
+
+
