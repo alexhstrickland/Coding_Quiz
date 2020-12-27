@@ -1,7 +1,6 @@
 var timer = document.querySelector("#time");
 var startBtn = document.querySelector("#start");
 var startPage = document.querySelector("#start-button");
-var submitBtn = document.querySelector("#init");
 var aBtns = document.querySelector("#vert");
 var currentQuestion;
 var score = 0;
@@ -132,10 +131,10 @@ function questionClick() {
     // check if user guessed wrong
         if (parseInt(clickedEvent.getAttribute("data-value")) !== questionAnswers[currentQuestion].answer) {
         // penalize time
-            time -= 15;
+            secs -= 15;
         
-            if (time < 0) {
-                time = 0;
+            if (secs < 0) {
+                secs = 0;
             }
     
             resultSection.textContent = "Incorrect!";
@@ -143,7 +142,6 @@ function questionClick() {
 
     
             resultSection.textContent = "Correct!";
-            score = score + 1;
             }
     
         // flash right/wrong feedback on page for half a second
@@ -170,25 +168,27 @@ function quizEnd() {
     final.textContent = "Your final score is " + score + ".";
 }
 
-function saveHighscore() {
-    // get value of input box
+// function saveHighscore() {
+//     var submitBtn = document.querySelector("#init").value;
+//     var userscore = 
+//     // get value of input box
+
+//     // make sure value wasn't empty
+//     if (initials !== "") {
+//       // get saved scores from localstorage, or if not any, set to empty array
   
-    // make sure value wasn't empty
-    if (initials !== "") {
-      // get saved scores from localstorage, or if not any, set to empty array
+//       // format new score object for current user
+//       var newScore = {
+//         score: time,
+//         initials: initials
+//       };
   
-      // format new score object for current user
-      var newScore = {
-        score: time,
-        initials: initials
-      };
+//       // save to localstorage
   
-      // save to localstorage
-  
-      // redirect to next page
-      window.location.href = "highscores.html";
-    }
-}
+//       // redirect to next page
+//       window.location.href = "highscores.html";
+//     }
+// }
 
 function checkForEnter(event) {
     // "13" represents the enter key
