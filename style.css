@@ -27,3 +27,9 @@ button {
 #initials {
     visibility: hidden;
 }
+
+.btn-group-vertical > button {
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+}

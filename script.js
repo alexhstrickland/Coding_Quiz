@@ -1,68 +1,68 @@
 var timer = document.querySelector("#time");
-var question = document.querySelector("#question");
+// var question = document.querySelector("#question");
 var startBtn = document.querySelector("#start");
 var startPage = document.querySelector("#start-button");
 var submitBtn = document.querySelector("#init");
-var currentQuestionIndex = 0;
-var i = 0;
+var aBtns = document.querySelector("#vert");
+var currentQuestion;
 var score = 0;
 var secs = 150;
 var buttonOne = document.querySelector("#btn1");
 var buttonTwo = document.querySelector("#btn2");
 var buttonThree = document.querySelector("#btn3");
 var buttonFour= document.querySelector("#btn4");
-var resultSection = document.getElementById("resultSec");
+var resultSection = document.querySelector("#result-sec")
 
 var questionAnswers = [
     {
         question: "Which of the following are looping structures in JavaScript?",
         options: ["For loop", "While loop", "Do-while loop", "All the above"],
-        answer: "All the above",
+        answer: "All the above"
     },
     {
         question: "Which of the following returns the calling string value converted to lower case?",
         options: ["changeCase(case)", "toLower()", "toLowerCase()", "None of the above"],
-        answer: "toLowerCase()",
+        answer: "toLowerCase()"
     },
     {
         question: "Which adds one or more elements to the end of an array and returns the new length of the array?",
         options: ["push()", "map()", "pop()", "join()"],
-        answer: "push()",
+        answer: "push()"
     },
     {
         question: "What HTML tag is JavaScript written under?",
         options: ["<js>", "<script>","<javascript>", "<scripted>"],
-        answer: "<script>",
+        answer: "<script>"
     },
     {
         question: "Which operator is used to assign a value to a variable?",
         options: ["=", "-", "+", "/"],
-        answer: "=",
+        answer: "="
     },
     {
         question: "How do you write 'Hello' in an alert box?",
         options: ["alertBox('Hello');", "msg('Hello');", "msgBox('Hello');", "alert('Hello');"],
-        answer: "alert('Hello');",
+        answer: "alert('Hello');"
     },
     {
         question: "How does a for loop begin?",
         options: ["for (i <= 10, i++)", "for i=1 to 10", "for (i=0, i<=5)", "for (i=0; i <=10; i++)"],
-        answer: "for (i=0; i <=10; i++)",
+        answer: "for (i=0; i <=10; i++)"
     },
     {
         question: "How do you round the number 5.25 to the nearest integer?",
         options: ["rnd(5.25)", "Math.rnd(5.25)", "Math.round(5.25)", "round(5.25)"],
-        answer: "Math.round(5.25)",
+        answer: "Math.round(5.25)"
     },
     {
         question: "Which event occurs when the user clicks on an HTML element?",
         options: ["onchange", "onmouseclick", "onclick", "onmouseover"],
-        answer: "onclick",
+        answer: "onclick"
     },
     {
         question: "Which of the following is not a JavaScript data type?",
         options: ["Number", "Float", "Boolean", "Undefined"],
-        answer: "Float",
+        answer: "Float"
     }
 ];
 
@@ -103,111 +103,68 @@ function startQuiz() {
 
 }
 
-function getQuestion() {
-    
-    if ((i < questionAnswers.length) && (secs > 0)) {
-        question.textContent = questionAnswers[i].question;
-        buttonOne.textContent = questionAnswers[i].options[0];
-        buttonTwo.textContent = questionAnswers[i].options[1];
-        buttonThree.textContent = questionAnswers[i].options[2];
-        buttonFour.textContent = questionAnswers[i].options[3];
+function getQuestion(currentQuestion) {
 
-        buttonOne.addEventListener("click", function() {
-            if(buttonOne.textContent === questionAnswers[i].answer) {
-                resultSection.textContent = "Correct";
-                score = score + 1;
-            }
-            else if (buttonOne.textContent !== questionAnswers[i].answer){
-                resultSection.textContent = "Incorrect";
-                secs-=15;
-            }
+    var qText = document.getElementById("question");
 
-            i++;
-            getQuestion();
-        });
+    if(currentQuestion < questionAnswers.length) {
+        qText.textContent = questionAnswers[currentQuestion].question;
+        aBtns.innerHTML="";
 
-        buttonTwo.addEventListener("click", function() {
-            if(buttonTwo.textContent === questionAnswers[i].answer) {
-                resultSection.textContent = "Correct";
-                score = score + 1;
-            }
-            else if (buttonTwo.textContent !== questionAnswers[i].answer){
-                resultSection.textContent = "Incorrect";
-                secs-=15;
-            }
+        for (var i=0; i < questionAnswers[currentQuestion].options.length; i++) {
+            var newB = document.createElement("button");
 
-            i++;
-            getQuestion();
-        });
+            newB.classList.add("btn");
+            newB.setAttribute= ("data-value", i+1)
+            newB.textContent = questionAnswers[currentQuestion].options[i];
 
-        buttonThree.addEventListener("click", function() {
-            if(buttonThree.textContent === questionAnswers[i].answer) {
-                resultSection.textContent = "Correct";
-                score = score + 1;
-            }
-            else if (buttonThree.textContent !== questionAnswers[i].answer){
-                resultSection.textContent = "Incorrect";
-                secs-=15;
-            }
 
-            i++;
-            getQuestion();
-        });
+            aBtns.appendChild(newB);
 
-        buttonFour.addEventListener("click", function() {
-            if(buttonFour.textContent === questionAnswers[i].answer) {
-                resultSection.textContent = "Correct";
-                score = score + 1;
-            }
-            else if (buttonFour.textContent !== questionAnswers[i].answer){
-                resultSection.textContent = "Incorrect";
-                secs-=15;
-            }
+        }
 
-            i++;
-            getQuestion();
-        });
     }
+
 }
 
 
 
-// function questionClick() {
-//     // check if user guessed wrong
-//     if (this.value !== questions[currentQuestionIndex].answer) {
-//       // penalize time
-//       time -= 15;
+function questionClick() {
+    // check if user guessed wrong
+    if (this.value !== questions[currentQuestion].answer) {
+      // penalize time
+      time -= 15;
   
-//       if (time < 0) {
-//         time = 0;
-//       }
+      if (time < 0) {
+        time = 0;
+      }
   
-//       // display new time on page
+      // display new time on page
   
-//       // play "wrong" sound effect
+      // play "wrong" sound effect
   
-//       feedbackEl.textContent = "Wrong!";
-//     } else {
-//       // play "right" sound effect
+      resultSection.textContent = "Wrong!";
+    } else {
+      // play "right" sound effect
   
-//       feedbackEl.textContent = "Correct!";
-//     }
+      resultSection.textContent = "Correct!";
+    }
   
-//     // flash right/wrong feedback on page for half a second
-//     feedbackEl.setAttribute("class", "feedback");
-//     setTimeout(function() {
-//       feedbackEl.setAttribute("class", "feedback hide");
-//     }, 1000);
+    // flash right/wrong feedback on page for half a second
+    feedbackEl.setAttribute("class", "feedback");
+    setTimeout(function() {
+      feedbackEl.setAttribute("class", "feedback hide");
+    }, 1000);
   
-//     // move to next question
+    // move to next question
   
-//     // check if we've run out of questions
-//     if (currentQuestionIndex === questions.length) {
-//       quizEnd();
-//     } else {
-//       getQuestion();
-//     }
-//   }
+    // check if we've run out of questions
+    if (currentQuestionIndex === questions.length) {
+      quizEnd();
+    } else {
+      getQuestion();
+    }
+  }
   
 function quizEnd() {
     // stop timer
@@ -261,7 +218,8 @@ function checkForEnter(event) {
 
 startBtn.addEventListener("click", function() {
     startQuiz();
-    getQuestion();
+    currentQuestion = 0;
+    getQuestion(0);
 });
 
   // user clicks button to submit initials
