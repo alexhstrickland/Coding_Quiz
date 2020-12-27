@@ -8,7 +8,8 @@ var secs = 150;
 var scorePage = document.querySelector("#scores");
 var submitBtn = document.querySelector("#init");
 var timerInterval;
-
+var userInitials = document.querySelector("#identification").value;
+var highscores = document.querySelector("#highscores");
 var questionAnswers = [
     {
         question: "Which of the following are looping structures in JavaScript?",
@@ -164,29 +165,24 @@ function quizEnd() {
     var final = document.querySelector("#final-score");
     final.textContent = "Your final score is " + secs + ".";
     hide("time");
+    userInitials.value = "";
     show("initials");
 }
 
 function saveHighscore() {
-    var userInitials = document.querySelector("#identification").value;
     var userScore = secs;
-    console.log(userInitials);
-    console.log(userScore);
     // get value of input box
 
     // make sure value wasn't empty
-    if (userInitials !== "") {
-        // get saved scores from localstorage, or if not any, set to empty array
-        var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+    if (userInitials.value !== "") {
         // format new score object for current user
         var newScore = {
             score: userScore,
-            initials: userInitials
-        };
+            initials: userInitials.value
+        }
     
         // save to localstorage
-        localStorage.setItem("userhighscores", JSON.stringify(newScore));
-        var highScores = JSON.parse(localStorage.getItem("newScore"))
+        localStorage.setItem("newScore", JSON.stringify(newScore));
 
         // sort highscores by score property in descending order
         highscores.sort(function(a, b) {
@@ -222,14 +218,17 @@ startBtn.addEventListener("click", function() {
 });
 
   // user clicks button to submit initials
-submitBtn.addEventListener("click", saveHighscore);
+submitBtn.addEventListener("click", function() {
+    console.log("xxx")
+    saveHighscore();
+});
 
 // goBack.addEventListener("click", function() {
 //     show("start-button");
 
 // }
-document.getElementById("clear").addEventListener("click", function() {
-    window.localStorage.removeItem("highscores");
-    window.location.reload();
-  });
+// document.getElementById("clear").addEventListener("click", function() {
+//     window.localStorage.removeItem("highscores");
+//     window.location.reload();
+//   });
 
