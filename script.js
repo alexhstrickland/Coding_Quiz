@@ -5,8 +5,8 @@ var aBtns = document.querySelector("#vert");
 var currentQuestion;
 var score = 0;
 var secs = 150;
-var final = document.querySelector("#final-score");
 var scorePage = document.querySelector("#scores");
+var timerInterval;
 
 var questionAnswers = [
     {
@@ -80,7 +80,6 @@ function timerSetting() {
     
         if(secs === 0) {
           clearInterval(timerInterval);
-          alert("done")
         }
     
     }, 1000);
@@ -163,9 +162,11 @@ function questionClick() {
   
 function quizEnd() {
     hide("quiz");
+    clearInterval(timerInterval);
+    var final = document.querySelector("#final-score");
+    final.textContent = "Your final score is " + secs + ".";
     hide("time");
     show("initials");
-    final.textContent = "Your final score is " + score + ".";
 }
 
 // function saveHighscore() {
