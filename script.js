@@ -6,6 +6,7 @@ var currentQuestion;
 var score = 0;
 var secs = 150;
 var scorePage = document.querySelector("#scores");
+var submitBtn = document.querySelector("#init");
 var timerInterval;
 
 var questionAnswers = [
@@ -166,34 +167,37 @@ function quizEnd() {
     show("initials");
 }
 
-// function saveHighscore() {
-//     var submitBtn = document.querySelector("#init").value;
-//     var userscore = 
-//     // get value of input box
+function saveHighscore() {
+    var userInitials = document.querySelector("#identification").value;
+    var userScore = secs;
+    console.log(userInitials);
+    console.log(userScore);
+    // get value of input box
 
-//     // make sure value wasn't empty
-//     if (initials !== "") {
-//       // get saved scores from localstorage, or if not any, set to empty array
+    // make sure value wasn't empty
+    if (userInitials !== "") {
+      // get saved scores from localstorage, or if not any, set to empty array
   
-//       // format new score object for current user
-//       var newScore = {
-//         score: time,
-//         initials: initials
-//       };
+      // format new score object for current user
+      var newScore = {
+        score: userScore,
+        initials: userInitials
+      };
   
-//       // save to localstorage
-  
-//       // redirect to next page
-//       window.location.href = "highscores.html";
-//     }
-// }
-
-function checkForEnter(event) {
-    // "13" represents the enter key
-    if (event.key === "Enter") {
-      saveHighscore();
+      // save to localstorage
+      localStorage.setItem("userhighscores", JSON.stringify(newScore));
+      var highScores = JSON.parse(localStorage.getItem("newScore"))
+      // redirect to next page
+      window.location.href = "highscores.html";
     }
 }
+
+// function checkForEnter(event) {
+//     // "13" represents the enter key
+//     if (event.key === "Enter") {
+//       saveHighscore();
+//     }
+// }
 
 startBtn.addEventListener("click", function() {
     startQuiz();
