@@ -16,11 +16,12 @@ button {
     user-select: none;
 }
 
-#start-button{
+#start-button {
+
 }
 
-#ul {
-    text-align: center;
+ul {
+    list-style-type: none;
 }
 
 #question{

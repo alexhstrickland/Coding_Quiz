@@ -15,9 +15,9 @@ highScores.forEach(function(score) {
     liTag.textContent = score.initials + " - " + score.score;
 
     // display on page
-    var olEl = document.getElementById("scoresA");
+    var ulEl = document.getElementById("scoresA");
 
-    olEl.appendChild(liTag);
+    ulEl.appendChild(liTag);
 
 });
 
