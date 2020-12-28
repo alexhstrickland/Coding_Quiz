@@ -2,15 +2,11 @@
 
 ## Description
 
-For this project, I have created my own personal page that includes an about me page, a portfolio page, and a contact page. I used Bootstrap, Google Fonts, and Font Awesome Icons to help me style my portfolio pages. I used Bootstrap to develop a site that includes:
+For this project, I have created a 10 question Javascript quiz that is timed. Each time an incorrect answer is chosen, the user is pentalized by losing seconds off the clock. The amount of seconds left at the end of the quiz is the final score for the user. The user is then prompted to enter their initials to save their final score.
 
-* a nav bar
-* a responsive layout
-* responsive images
+The user is able to access a high scores page to view others scores. A clear button is also included in the page to clear all recent scores.
 
-Using Bootstrap's grid system, I was able to create a responsive layout using containers, rows, and columns. After the index, contact, and portfolio pages were complete, I used a validation service to check my HTML. Semantic HTML was used to meet accessibilty standards.
-
-The project has been eployed at a live URL. To access the live URL, please click here [alexhstrickland.github.io](https://alexhstrickland.github.io/).
+The project has been eployed at a live URL. To access the live URL, please click here [Coding_Quiz](https://alexhstrickland.github.io/Coding_Quiz/).
 
 ## Usage
 
