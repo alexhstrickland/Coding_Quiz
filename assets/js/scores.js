@@ -25,7 +25,6 @@ document.getElementById("clear").addEventListener("click",function() {
     window.localStorage.removeItem("highScores");
     var list = document.getElementById('scoresA')
     list.remove()
-// window.location.reload();
 
 
 });
