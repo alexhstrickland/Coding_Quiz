@@ -16,6 +16,13 @@ button {
     user-select: none;
 }
 
+#start-button{
+}
+
+#ul {
+    text-align: center;
+}
+
 #question{
     text-align: center;
 }

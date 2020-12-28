@@ -1,15 +1,17 @@
 var timer = document.querySelector("#time");
-var startBtn = document.querySelector("#start");
-var startPage = document.querySelector("#start-button");
 var aBtns = document.querySelector("#vert");
 var currentQuestion;
 var score = 0;
 var secs = 150;
 var scorePage = document.querySelector("#scores");
-var submitBtn = document.querySelector("#init");
 var timerInterval;
-var userInitials = document.querySelector("#identification").value;
+var olEl = document.querySelector("highscores");
+var liTag;
+var finalINIT = document.querySelector("#initials")
+var userInitials = document.querySelector("#identification");
 var highscores = document.querySelector("#highscores");
+
+// quiz questions and answers
 var questionAnswers = [
     {
         question: "Which of the following are looping structures in JavaScript?",
@@ -63,12 +65,14 @@ var questionAnswers = [
     }
 ];
 
+// hide specified id's
 function hide(id) {
     var hidden = document.getElementById(id);
     // hidden.style.visibility= "hidden";
     hidden.style.display = "none";
 }
  
+// show specified id's
 function show(id) {
     var visible = document.getElementById(id);
     visible.style.display = "visible";
@@ -87,14 +91,18 @@ function timerSetting() {
     }, 1000);
 }
 
-
+// start quiz and hide unnecessary divs
 function startQuiz() {
     hide("start-button");
     show("quiz");
     timerSetting();
+    currentQuestion = 0;
+    getQuestion(0);
+    questionClick();
 
 }
 
+// add new buttons and change question
 function getQuestion(currentQuestion) {
 
     var qText = document.getElementById("question");
@@ -125,10 +133,9 @@ function questionClick() {
         if (event.target.matches("button")) {
             clickedEvent = event.target;
         }
-    // })
-    // check if user guessed wrong
+        // check if user guessed wrong
         if (parseInt(clickedEvent.getAttribute("data-value")) !== questionAnswers[currentQuestion].answer) {
-        // penalize time
+            // penalize time
             secs -= 15;
         
             if (secs < 0) {
@@ -158,77 +165,48 @@ function questionClick() {
         }
     })
 }
-  
+// function to end quiz  
 function quizEnd() {
-    hide("quiz");
+    quiz.style.display = "none"
     clearInterval(timerInterval);
     var final = document.querySelector("#final-score");
     final.textContent = "Your final score is " + secs + ".";
     hide("time");
-    userInitials.value = "";
-    show("initials");
+    finalINIT.style.visibility = "visible"
 }
 
+// function to save scores
 function saveHighscore() {
-    var userScore = secs;
-    // get value of input box
+    var score = secs;
+    var userInitials = identification.value;
 
-    // make sure value wasn't empty
-    if (userInitials.value !== "") {
-        // format new score object for current user
-        var newScore = {
-            score: userScore,
-            initials: userInitials.value
+    var newScore = [
+        {
+        score: score,
+        initials: userInitials
         }
-    
-        // save to localstorage
-        localStorage.setItem("newScore", JSON.stringify(newScore));
+    ];
+    // save to localstorage
+    localStorage.setItem("newscore", JSON.stringify(newScore));
+    // redirect to highscores
+    window.location.href = "highscores.html";
+};
 
-        // sort highscores by score property in descending order
-        highscores.sort(function(a, b) {
-        return b.score - a.score;
-        });
 
-        highscores.forEach(function(score) {
-        // create li tag for each high score
-        var liTag = document.createElement("li");
-        liTag.textContent = score.initials + " - " + score.score;
-
-        // display on page
-        var olEl = document.getElementById("highscores");
-        olEl.appendChild(liTag);
-        });
-        // redirect to next page
-        window.location.href = "highscores.html";
+function checkForEnter(event) {
+    // "13" represents the enter key
+    if (event.key === "Enter") {
+      saveHighscore();
     }
+};
+
+// user clicks button to start quiz
+var startBtn = document.getElementById("start");
+if(startBtn){
+    startBtn.addEventListener("click", startQuiz, false);
 }
-
-// function checkForEnter(event) {
-//     // "13" represents the enter key
-//     if (event.key === "Enter") {
-//       saveHighscore();
-//     }
-// }
-
-startBtn.addEventListener("click", function() {
-    startQuiz();
-    currentQuestion = 0;
-    getQuestion(0);
-    questionClick();
-});
-
-  // user clicks button to submit initials
-submitBtn.addEventListener("click", function() {
-    console.log("xxx")
-    saveHighscore();
-});
-
-// goBack.addEventListener("click", function() {
-//     show("start-button");
-
-// }
-// document.getElementById("clear").addEventListener("click", function() {
-//     window.localStorage.removeItem("highscores");
-//     window.location.reload();
-//   });
-
+// user clicks button to submit initials
+var submitBtn = document.getElementById("submit");
+if(submitBtn){
+    submitBtn.addEventListener("click", saveHighscore, false);
+}
