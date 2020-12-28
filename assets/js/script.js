@@ -189,7 +189,7 @@ function saveHighscore() {
     // save to localstorage
     localStorage.setItem("newscore", JSON.stringify(newScore));
     // redirect to highscores
-    window.location.href = "highscores.html";
+    window.location.href = "highScores.html";
 };
 
 
